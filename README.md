@@ -72,7 +72,8 @@ get_editors(project_id, opts = {})
 
 ## Result objects
 
-There's convenience classes for the following object types:
+There's a couple of convenience classes for the following object types:
+
  * `User`
  * `Subscription`
  * `Project`
@@ -82,19 +83,29 @@ There's convenience classes for the following object types:
 #### Object
 
 Methods:
-  * `id` (ObjectID), identifier of the object
-  * `name` (_refObjectName), name of the object
-  * `url` (_ref), URL of the object
+  * `id`, identifier of the object
+  * `name`, name of the object
+  * `url`, URL of the object
   * `workspace`, name of the object's workspace
 
 
 #### User
 
 Methods:
-  * `username` (UserName), username
-  * `first_name` (FirstName), first name
-  * `last_name` (LastName), last name
+  * `username`, username
+  * `first_name`, first name
+  * `last_name`, last name
   * `name`, full name
-  * `email` (EmailAddress), email address
-  * `admin?` (SubscriptionAdmin), is the user admin in the subscription?
+  * `email`, email address
+  * `admin?`, is the user admin in the subscription?
+
+#### Subscription
+
+Methods:
+  * `subscription_id`, subcription identifier
+
+#### Project
+
+Methods:
+  * `subscription`, `Subscription` of the project
 
