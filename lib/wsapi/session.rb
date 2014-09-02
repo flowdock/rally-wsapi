@@ -31,6 +31,8 @@ module Wsapi
   end
 
   class Session
+    attr_accessor :workspace_id
+
     def initialize(session_id, opts = {})
       @api_version = opts[:version] || "3.0"
       @session_id = session_id
