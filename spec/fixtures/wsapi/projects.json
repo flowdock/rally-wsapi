@@ -1,0 +1,267 @@
+{
+  "QueryResult": {
+    "Errors": [],
+    "Warnings": [],
+    "TotalResultCount": 4,
+    "StartIndex": 1,
+    "PageSize": 20,
+    "Results": [
+      {
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/project/686d6448-00b1-4173-b130-9214f13d3913",
+        "_objectVersion": "6",
+        "_refObjectName": "Speeding Up ALM Development",
+        "CreationDate": "2013-09-26T16:18:02.444Z",
+        "_CreatedAt": "Sep 26",
+        "ObjectID": "686d6448-00b1-4173-b130-9214f13d3913",
+        "Subscription": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/subscription/76de2093-5f8d-403d-a2db-fcec9c5c7079",
+          "_refObjectName": "Rally Development",
+          "_type": "Subscription"
+        },
+        "Workspace": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/workspace/3497d043-3ea7-4c8a-bf78-069847936c13",
+          "_refObjectName": "Rally",
+          "_type": "Workspace"
+        },
+        "BuildDefinitions": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/686d6448-00b1-4173-b130-9214f13d3913/BuildDefinitions",
+          "_type": "BuildDefinition",
+          "Count": 1
+        },
+        "Children": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/686d6448-00b1-4173-b130-9214f13d3913/Children",
+          "_type": "Project",
+          "Count": 0
+        },
+        "Description": "",
+        "Editors": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/686d6448-00b1-4173-b130-9214f13d3913/Editors",
+          "_type": "User",
+          "Count": 252
+        },
+        "Iterations": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/686d6448-00b1-4173-b130-9214f13d3913/Iterations",
+          "_type": "Iteration",
+          "Count": 0
+        },
+        "Name": "Speeding Up ALM Development",
+        "Notes": "",
+        "Owner": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/user/4f1d5c6b-7ec1-4ab5-a32e-b2701a78d2a1",
+          "_refObjectName": "The Goze-father",
+          "_type": "User"
+        },
+        "Parent": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/project/a24f6339-7bb6-4638-bde0-3c6132354444",
+          "_refObjectName": "Rally",
+          "_type": "Project"
+        },
+        "Releases": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/686d6448-00b1-4173-b130-9214f13d3913/Releases",
+          "_type": "Release",
+          "Count": 0
+        },
+        "SchemaVersion": "2f8411ea60b42a93bab639d8c79d5b57",
+        "State": "Open",
+        "TeamMembers": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/686d6448-00b1-4173-b130-9214f13d3913/TeamMembers",
+          "_type": "User",
+          "Count": 0
+        },
+        "_type": "Project"
+      },
+      {
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/project/bb34ef10-2fb8-4327-995a-4efc2498a6d2",
+        "_objectVersion": "1",
+        "_refObjectName": "Jeffrie Penrod",
+        "CreationDate": "2013-10-14T15:43:22.153Z",
+        "_CreatedAt": "Oct 14",
+        "ObjectID": "bb34ef10-2fb8-4327-995a-4efc2498a6d2",
+        "Subscription": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/subscription/76de2093-5f8d-403d-a2db-fcec9c5c7079",
+          "_refObjectName": "Rally Development",
+          "_type": "Subscription"
+        },
+        "Workspace": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/workspace/3497d043-3ea7-4c8a-bf78-069847936c13",
+          "_refObjectName": "Rally",
+          "_type": "Workspace"
+        },
+        "BuildDefinitions": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/bb34ef10-2fb8-4327-995a-4efc2498a6d2/BuildDefinitions",
+          "_type": "BuildDefinition",
+          "Count": 1
+        },
+        "Children": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/bb34ef10-2fb8-4327-995a-4efc2498a6d2/Children",
+          "_type": "Project",
+          "Count": 0
+        },
+        "Description": "",
+        "Editors": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/bb34ef10-2fb8-4327-995a-4efc2498a6d2/Editors",
+          "_type": "User",
+          "Count": 253
+        },
+        "Iterations": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/bb34ef10-2fb8-4327-995a-4efc2498a6d2/Iterations",
+          "_type": "Iteration",
+          "Count": 6
+        },
+        "Name": "Jeffrie Penrod",
+        "Notes": "",
+        "Owner": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/user/bb7a7229-9929-42a8-a1f4-3ebf9f77561a",
+          "_refObjectName": "Brent",
+          "_type": "User"
+        },
+        "Parent": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/project/66d3637e-a3d8-46b1-b166-86c732e3c008",
+          "_refObjectName": "TAM Onboarding",
+          "_type": "Project"
+        },
+        "Releases": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/bb34ef10-2fb8-4327-995a-4efc2498a6d2/Releases",
+          "_type": "Release",
+          "Count": 0
+        },
+        "SchemaVersion": "74713866d8d6c4bc1247fc24a8a4effa",
+        "State": "Open",
+        "TeamMembers": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/bb34ef10-2fb8-4327-995a-4efc2498a6d2/TeamMembers",
+          "_type": "User",
+          "Count": 0
+        },
+        "_type": "Project"
+      },
+      {
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/project/3f5e6151-f502-4da1-aaa3-1d0cab7c853b",
+        "_objectVersion": "6",
+        "_refObjectName": "User Experience",
+        "CreationDate": "2013-10-14T16:08:57.496Z",
+        "_CreatedAt": "Oct 14",
+        "ObjectID": "3f5e6151-f502-4da1-aaa3-1d0cab7c853b",
+        "Subscription": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/subscription/76de2093-5f8d-403d-a2db-fcec9c5c7079",
+          "_refObjectName": "Rally Development",
+          "_type": "Subscription"
+        },
+        "Workspace": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/workspace/3497d043-3ea7-4c8a-bf78-069847936c13",
+          "_refObjectName": "Rally",
+          "_type": "Workspace"
+        },
+        "BuildDefinitions": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/3f5e6151-f502-4da1-aaa3-1d0cab7c853b/BuildDefinitions",
+          "_type": "BuildDefinition",
+          "Count": 1
+        },
+        "Children": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/3f5e6151-f502-4da1-aaa3-1d0cab7c853b/Children",
+          "_type": "Project",
+          "Count": 0
+        },
+        "Description": "",
+        "Editors": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/3f5e6151-f502-4da1-aaa3-1d0cab7c853b/Editors",
+          "_type": "User",
+          "Count": 253
+        },
+        "Iterations": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/3f5e6151-f502-4da1-aaa3-1d0cab7c853b/Iterations",
+          "_type": "Iteration",
+          "Count": 0
+        },
+        "Name": "User Experience",
+        "Notes": "",
+        "Owner": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/user/c0d735d4-d0c0-4141-b23a-da3f8d39a8a6",
+          "_refObjectName": "Katrina",
+          "_type": "User"
+        },
+        "Parent": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/project/3adb00ef-32bc-49ac-b5e6-0aa30962f160",
+          "_refObjectName": "R&D",
+          "_type": "Project"
+        },
+        "Releases": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/3f5e6151-f502-4da1-aaa3-1d0cab7c853b/Releases",
+          "_type": "Release",
+          "Count": 2
+        },
+        "SchemaVersion": "c91db61066e1f3b6a96b9298694f3834",
+        "State": "Open",
+        "TeamMembers": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/3f5e6151-f502-4da1-aaa3-1d0cab7c853b/TeamMembers",
+          "_type": "User",
+          "Count": 5
+        },
+        "_type": "Project"
+      },
+      {
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/project/6a0c6bcf-7cd8-4b37-895d-154b88023459",
+        "_objectVersion": "8",
+        "_refObjectName": "OCTO",
+        "CreationDate": "2013-10-16T19:08:31.680Z",
+        "_CreatedAt": "Oct 16",
+        "ObjectID": "6a0c6bcf-7cd8-4b37-895d-154b88023459",
+        "Subscription": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/subscription/76de2093-5f8d-403d-a2db-fcec9c5c7079",
+          "_refObjectName": "Rally Development",
+          "_type": "Subscription"
+        },
+        "Workspace": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/workspace/3497d043-3ea7-4c8a-bf78-069847936c13",
+          "_refObjectName": "Rally",
+          "_type": "Workspace"
+        },
+        "BuildDefinitions": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/6a0c6bcf-7cd8-4b37-895d-154b88023459/BuildDefinitions",
+          "_type": "BuildDefinition",
+          "Count": 1
+        },
+        "Children": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/6a0c6bcf-7cd8-4b37-895d-154b88023459/Children",
+          "_type": "Project",
+          "Count": 0
+        },
+        "Description": "",
+        "Editors": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/6a0c6bcf-7cd8-4b37-895d-154b88023459/Editors",
+          "_type": "User",
+          "Count": 255
+        },
+        "Iterations": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/6a0c6bcf-7cd8-4b37-895d-154b88023459/Iterations",
+          "_type": "Iteration",
+          "Count": 0
+        },
+        "Name": "OCTO",
+        "Notes": "",
+        "Owner": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/user/8d3069cc-a2d1-40ec-a45f-b2046112c88f",
+          "_refObjectName": "Rachel",
+          "_type": "User"
+        },
+        "Parent": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/project/a24f6339-7bb6-4638-bde0-3c6132354444",
+          "_refObjectName": "Rally",
+          "_type": "Project"
+        },
+        "Releases": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/6a0c6bcf-7cd8-4b37-895d-154b88023459/Releases",
+          "_type": "Release",
+          "Count": 0
+        },
+        "SchemaVersion": "e664fb3c576cdbf61be4e4450282ef9d",
+        "State": "Open",
+        "TeamMembers": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Project/6a0c6bcf-7cd8-4b37-895d-154b88023459/TeamMembers",
+          "_type": "User",
+          "Count": 7
+        },
+        "_type": "Project"
+      }
+    ]
+  }
+}

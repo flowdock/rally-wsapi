@@ -1,0 +1,62 @@
+{
+  "QueryResult": {
+    "Errors": [],
+    "Warnings": [],
+    "TotalResultCount": 1,
+    "StartIndex": 1,
+    "PageSize": 1,
+    "Results": [
+      {
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/user/fb96bb72-e8ed-4f17-bcf4-4d8293ae88e8",
+        "_objectVersion": "22",
+        "_refObjectName": "Antti",
+        "CreationDate": "2013-04-02T17:04:55.938Z",
+        "_CreatedAt": "Apr 2",
+        "ObjectID": "fb96bb72-e8ed-4f17-bcf4-4d8293ae88e8",
+        "Subscription": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/subscription/76de2093-5f8d-403d-a2db-fcec9c5c7079",
+          "_refObjectName": "Rally Development",
+          "_type": "Subscription"
+        },
+        "CostCenter": "None",
+        "Department": "None",
+        "Disabled": false,
+        "DisplayName": "Antti",
+        "EmailAddress": "apitkanen@rallydev.com",
+        "FirstName": "Antti",
+        "LandingPage": "/dashboard",
+        "LastLoginDate": "2013-10-17T05:36:06.263Z",
+        "LastName": "Pitkanen",
+        "LastPasswordUpdateDate": "2013-04-02T17:18:13.216Z",
+        "MiddleName": null,
+        "NetworkID": null,
+        "OfficeLocation": "None",
+        "OnpremLdapUsername": null,
+        "Phone": null,
+        "RevisionHistory": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/revisionhistory/9cf45e44-6eda-4608-8074-2d58c4384a44",
+          "_type": "RevisionHistory"
+        },
+        "Role": "Developer",
+        "ShortDisplayName": null,
+        "SubscriptionAdmin": false,
+        "TeamMemberships": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/User/fb96bb72-e8ed-4f17-bcf4-4d8293ae88e8/TeamMemberships",
+          "_type": "Project",
+          "Count": 1
+        },
+        "UserName": "antti",
+        "UserPermissions": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/User/fb96bb72-e8ed-4f17-bcf4-4d8293ae88e8/UserPermissions",
+          "_type": "UserPermission",
+          "Count": 1
+        },
+        "UserProfile": {
+          "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/userprofile/2cf297fe-48ec-49a6-8bb9-57dae8c09c28",
+          "_type": "UserProfile"
+        },
+        "_type": "User"
+      }
+    ]
+  }
+}

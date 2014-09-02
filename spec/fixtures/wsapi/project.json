@@ -1,0 +1,88 @@
+{
+  "Project": {
+    "_rallyAPIMajor": "2",
+    "_rallyAPIMinor": "0",
+    "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/project/79013919",
+    "_objectVersion": "24",
+    "_refObjectName": "The Chuck Norris",
+    "CreationDate": "2007-10-09T14:49:16.000Z",
+    "_CreatedAt": "Oct 9, 2007",
+    "ObjectID": "79013919",
+    "Subscription": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/subscription/400059",
+      "_refObjectName": "Rally Development",
+      "_type": "Subscription"
+    },
+    "Workspace": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/workspace/41529001",
+      "_refObjectName": "Rally",
+      "_type": "Workspace"
+    },
+    "BuildDefinitions": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Project/79013919/BuildDefinitions",
+      "_type": "BuildDefinition",
+      "Count": 1
+    },
+    "Children": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Project/79013919/Children",
+      "_type": "Project",
+      "Count": 1
+    },
+    "Description": "When Chuck Norris was born, the only person who cried was the doctor. Never slap Chuck Norris.",
+    "Editors": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Project/79013919/Editors",
+      "_type": "User",
+      "Count": 288
+    },
+    "Iterations": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Project/79013919/Iterations",
+      "_type": "Iteration",
+      "Count": 124
+    },
+    "Name": "The Chuck Norris",
+    "Notes": "",
+    "Owner": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/user/162562330",
+      "_refObjectName": "Steve Stolt",
+      "_type": "User"
+    },
+    "Parent": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/project/2921510967",
+      "_refObjectName": "z Closed Projects",
+      "_type": "Project"
+    },
+    "Releases": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Project/79013919/Releases",
+      "_type": "Release",
+      "Count": 220
+    },
+    "State": "Open",
+    "TeamMembers": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Project/79013919/TeamMembers",
+      "_type": "User",
+      "Count": 40
+    },
+    "Errors": [],
+    "Warnings": []
+  }
+}

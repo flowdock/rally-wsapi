@@ -1,0 +1,10 @@
+{
+  "QueryResult": {
+    "Errors": ["Could not parse: Unknown operator \")\""],
+    "Warnings": [],
+    "TotalResultCount": 0,
+    "StartIndex": 0,
+    "PageSize": 0,
+    "Results": []
+  }
+}

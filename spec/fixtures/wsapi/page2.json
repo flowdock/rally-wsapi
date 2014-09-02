@@ -1,0 +1,76 @@
+{
+    "QueryResult": {
+        "_rallyAPIMajor": "2",
+        "_rallyAPIMinor": "0",
+        "Errors": [],
+        "Warnings": [],
+        "TotalResultCount": 3,
+        "StartIndex": 2,
+        "PageSize": 1,
+        "Results": [
+            {
+                "_rallyAPIMajor": "2",
+                "_rallyAPIMinor": "0",
+                "_ref": "https://test16cluster.f4tech.com/slm/webservice/v2.0/user/425841602",
+                "_objectVersion": "760",
+                "_refObjectName": "Garston",
+                "CreationDate": "2009-06-22T15:50:08.000Z",
+                "_CreatedAt": "Jun 22, 2009",
+                "ObjectID": 425841602,
+                "Subscription": {
+                    "_rallyAPIMajor": "2",
+                    "_rallyAPIMinor": "0",
+                    "_ref": "https://test16cluster.f4tech.com/slm/webservice/v2.0/subscription/400059",
+                    "_refObjectName": "Rally Development",
+                    "_type": "Subscription"
+                },
+                "CostCenter": "None",
+                "Department": "None",
+                "Disabled": false,
+                "DisplayName": "Garston",
+                "EmailAddress": "bogus@rallydev.com",
+                "FirstName": "Garston",
+                "LandingPage": "/dashboard",
+                "LastLoginDate": "2013-04-02T23:30:51.634Z",
+                "LastName": "Tremblay",
+                "LastPasswordUpdateDate": "2009-06-22T15:56:05.000Z",
+                "MiddleName": null,
+                "NetworkID": null,
+                "OfficeLocation": "None",
+                "OnpremLdapUsername": null,
+                "Phone": null,
+                "RevisionHistory": {
+                    "_rallyAPIMajor": "2",
+                    "_rallyAPIMinor": "0",
+                    "_ref": "https://test16cluster.f4tech.com/slm/webservice/v2.0/revisionhistory/425841606",
+                    "_type": "RevisionHistory"
+                },
+                "Role": "None",
+                "ShortDisplayName": null,
+                "SubscriptionAdmin": false,
+                "TeamMemberships": {
+                    "_rallyAPIMajor": "2",
+                    "_rallyAPIMinor": "0",
+                    "_ref": "https://test16cluster.f4tech.com/slm/webservice/v2.0/User/425841602/TeamMemberships",
+                    "_type": "Project",
+                    "Count": 82
+                },
+                "UserName": "g",
+                "UserPermissions": {
+                    "_rallyAPIMajor": "2",
+                    "_rallyAPIMinor": "0",
+                    "_ref": "https://test16cluster.f4tech.com/slm/webservice/v2.0/User/425841602/UserPermissions",
+                    "_type": "UserPermission",
+                    "Count": 1
+                },
+                "UserProfile": {
+                    "_rallyAPIMajor": "2",
+                    "_rallyAPIMinor": "0",
+                    "_ref": "https://test16cluster.f4tech.com/slm/webservice/v2.0/userprofile/425841604",
+                    "_type": "UserProfile"
+                },
+                "_type": "User"
+            }
+        ]
+    }
+}

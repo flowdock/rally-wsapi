@@ -1,0 +1,66 @@
+{
+  "User": {
+    "_rallyAPIMajor": "2",
+    "_rallyAPIMinor": "0",
+    "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/user/11220674082",
+    "_objectVersion": "12",
+    "_refObjectName": "Antti",
+    "CreationDate": "2013-04-02T17:04:55.938Z",
+    "_CreatedAt": "Apr 2",
+    "ObjectID": "11220674082",
+    "Subscription": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/subscription/400059",
+      "_refObjectName": "Rally Development",
+      "_type": "Subscription"
+    },
+    "CostCenter": "None",
+    "Department": "None",
+    "Disabled": false,
+    "DisplayName": "Antti",
+    "EmailAddress": "apitkanen@rallydev.com",
+    "FirstName": "Antti",
+    "LandingPage": "/dashboard",
+    "LastLoginDate": "2013-04-17T07:37:06.856Z",
+    "LastName": "Pitkanen",
+    "LastPasswordUpdateDate": "2013-04-02T17:18:13.216Z",
+    "MiddleName": null,
+    "NetworkID": null,
+    "OfficeLocation": "None",
+    "OnpremLdapUsername": null,
+    "Phone": null,
+    "RevisionHistory": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/revisionhistory/11220674083",
+      "_type": "RevisionHistory"
+    },
+    "Role": "None",
+    "ShortDisplayName": null,
+    "SubscriptionAdmin": true,
+    "TeamMemberships": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/User/11220674082/TeamMemberships",
+      "_type": "Project",
+      "Count": 0
+    },
+    "UserName": "antti",
+    "UserPermissions": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/User/11220674082/UserPermissions",
+      "_type": "UserPermission",
+      "Count": 1
+    },
+    "UserProfile": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/userprofile/11220674084",
+      "_type": "UserProfile"
+    },
+    "Errors": [],
+    "Warnings": []
+  }
+}

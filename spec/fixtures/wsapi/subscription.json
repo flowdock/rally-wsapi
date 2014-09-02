@@ -1,0 +1,34 @@
+{
+  "Subscription": {
+    "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/subscription/76de2093-5f8d-403d-a2db-fcec9c5c7079",
+    "_objectVersion": "56",
+    "_refObjectName": "Rally Development",
+    "CreationDate": "2004-07-16T22:12:12.000Z",
+    "_CreatedAt": "Jul 17, 2004",
+    "ObjectID": "76de2093-5f8d-403d-a2db-fcec9c5c7079",
+    "ExpirationDate": null,
+    "MaximumCustomUserFields": -1,
+    "MaximumProjects": -1,
+    "Modules": "Integration Hub,Rally Portfolio Manager,HP Integration,IBM Integration,Rally Idea Manager,Rally Quality Manager,Rally Support Manager,Rally Time Tracker,SSO,IP Restriction,Extension Whitelist",
+    "Name": "Rally Development",
+    "PasswordExpirationDays": 0,
+    "PreviousPasswordCount": 0,
+    "ProjectHierarchyEnabled": true,
+    "RevisionHistory": {
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/revisionhistory/0f1a111e-c895-408d-9994-71b94f38b794",
+      "_type": "RevisionHistory"
+    },
+    "SessionTimeoutSeconds": null,
+    "StoryHierarchyEnabled": true,
+    "StoryHierarchyType": "Unlimited",
+    "SubscriptionID": 100,
+    "SubscriptionType": "Unlimited",
+    "Workspaces": {
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/Subscription/76de2093-5f8d-403d-a2db-fcec9c5c7079/Workspaces",
+      "_type": "Workspace",
+      "Count": 1
+    },
+    "Errors": [],
+    "Warnings": []
+  }
+}
