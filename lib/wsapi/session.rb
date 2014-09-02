@@ -1,11 +1,7 @@
-require 'oj'
 require 'multi_json'
 require 'faraday'
 
-require 'wsapi/models/object'
-require 'wsapi/models/subscription'
-require 'wsapi/models/user'
-require 'wsapi/models/project'
+require_relative './mapper'
 
 module Wsapi
   class StandardErrorWithResponse < StandardError
@@ -20,51 +16,17 @@ module Wsapi
   class ObjectNotFoundError < StandardErrorWithResponse; end
   class IpAddressLimited < StandardErrorWithResponse; end
 
-  WSAPI_URL = ENV['WSAPI_URL'] || ''
+  WSAPI_URL = ENV['WSAPI_URL'] || 'https://rally1.rallydev.com/slm/webservice/'
 
-  class ZuulAuthentication < Faraday::Middleware
-    def initialize(logger, zuul_session_id)
-      @zuul_session_id = zuul_session_id
+  class WsapiAuthentication < Faraday::Middleware
+    def initialize(logger, session_id)
+      @session_id = session_id
       super(logger)
     end
 
     def call(env)
-      env[:request_headers]['ZSESSIONID'] = @zuul_session_id
+      env[:request_headers]['ZSESSIONID'] = @session_id
       @app.call(env)
-    end
-  end
-
-  class Mapper
-    def self.get_errors(json)
-      if result = json["QueryResult"]
-        result["Errors"]
-      elsif result = json["OperationResult"]
-        result["Errors"]
-      else
-        []
-      end
-    end
-
-    def self.get_object(response)
-      json = MultiJson.load(response.body)
-      if get_errors(json).empty? && json.size == 1
-        Wsapi::Object.from_data(json.keys.first, json.values.first)
-      else
-        raise ApiError.new("Errors: #{get_errors(json).inspect}", response)
-      end
-    rescue MultiJson::LoadError, Oj::ParseError
-      raise ApiError.new("Invalid JSON response from WSAPI: #{response.body}", response)
-    end
-
-    def self.get_objects(response)
-      json = MultiJson.load(response.body)
-      if get_errors(json).empty? && query_result = json["QueryResult"]
-        query_result["Results"].map { |object| Wsapi::Object.from_data(object["_type"], object) }
-      else
-        raise ApiError.new("Errors: #{get_errors(json).inspect}", response)
-      end
-    rescue MultiJson::LoadError, Oj::ParseError
-      raise ApiError.new("Invalid JSON response from WSAPI: #{response.body}", response)
     end
   end
 
@@ -75,7 +37,7 @@ module Wsapi
       @workspace_id = opts[:workspace_id]
       @conn = Faraday.new(ssl: { verify: false} ) do |faraday|
         faraday.request  :url_encoded # form-encode POST params
-        faraday.use ZuulAuthentication, @session_id
+        faraday.use WsapiAuthentication, @session_id
         faraday.adapter Faraday.default_adapter # make requests with Net::HTTP
       end
     end
