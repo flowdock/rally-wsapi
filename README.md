@@ -16,56 +16,85 @@ The constructor also accepts the following options:
   * `:version`, WSAPI version, default is `3.0`
 
 
-## Method reference
+## Method reference for Session
 
 Some methods accept an optional hash that can have the following options:
- * `:query`, add conditions for fetching objects. E.g. `(UserName = "John")`, see WSAPI documentation for details about the syntax.
+ * `:query`, add conditions for fetching objects. E.g. `(UserName = "John")`, see WSAPI documentation for details about the syntax
  * `:start`, default: `1`, fetch results starting from given number
  * `:workspace`, override workspace setting of the session
  * `:pagesize`, default: `200`, page size for results
  * `:fetch`, default: `true`, fetch full objects
 
-### Get the authenticated user
+#### Get the authenticated user
 ```
 get_current_user
 ```
 
-### Get a user
+#### Get a user
 ```
 get_user(user_id)
 ```
 
-### Get a user by username
+#### Get a user by username
 ```
 get_user_by_username(username)
 ```
 
-### Get the subscription of the authenticated user
+#### Get the subscription of the authenticated user
 ```
 get_user_subscription
 ```
 
-### Get a subscription
+#### Get a subscription
 ```
 get_project(subscription_id)
 ```
 
-### Get a project
+#### Get a project
 ```
 get_project(project_id)
 ```
 
-### Get projecsts of the authenticated user
+#### Get projects of the authenticated user
 ```
 get_projects(opts = {})
 ```
 
-### Get team members in a project
+#### Get team members in a project
 ```
 get_team_members(project_id, opts = {})
 ```
 
-### Get editors in a project
+#### Get editors in a project
 ```
 get_editors(project_id, opts = {})
 ```
+
+## Result objects
+
+There's convenience classes for the following object types:
+ * `User`
+ * `Subscription`
+ * `Project`
+
+ Other object types are represented by the generic `Object` class which the specific types above extend.
+
+#### Object
+
+Methods:
+  * `id` (ObjectID), identifier of the object
+  * `name` (_refObjectName), name of the object
+  * `url` (_ref), URL of the object
+  * `workspace`, name of the object's workspace
+
+
+#### User
+
+Methods:
+  * `username` (UserName), username
+  * `first_name` (FirstName), first name
+  * `last_name` (LastName), last name
+  * `name`, full name
+  * `email` (EmailAddress), email address
+  * `admin?` (SubscriptionAdmin), is the user admin in the subscription?
+
