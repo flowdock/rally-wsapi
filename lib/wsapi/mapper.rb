@@ -1,4 +1,3 @@
-require 'oj'
 require 'multi_json'
 
 require_relative './models/object'
@@ -25,7 +24,7 @@ module Wsapi
       else
         raise ApiError.new("Errors: #{get_errors(json).inspect}", response)
       end
-    rescue MultiJson::LoadError, Oj::ParseError
+    rescue MultiJson::LoadError
       raise ApiError.new("Invalid JSON response from WSAPI: #{response.body}", response)
     end
 
@@ -36,7 +35,7 @@ module Wsapi
       else
         raise ApiError.new("Errors: #{get_errors(json).inspect}", response)
       end
-    rescue MultiJson::LoadError, Oj::ParseError
+    rescue MultiJson::LoadError
       raise ApiError.new("Invalid JSON response from WSAPI: #{response.body}", response)
     end
   end
