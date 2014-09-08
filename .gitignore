@@ -10,6 +10,7 @@
 /tmp/
 
 .DS_Store
+Gemfile.lock
 
 ## Specific to RubyMotion:
 .dat*
