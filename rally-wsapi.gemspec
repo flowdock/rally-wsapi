@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Antti Pitk\u{e4}nen"]
-  s.date = "2014-09-08"
+  s.date = "2014-09-10"
   s.description = "Simple client for Rally WSAPI"
   s.email = "antti@flowdock.com"
   s.extra_rdoc_files = [
