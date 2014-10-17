@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
     "lib/wsapi/session.rb"
   ]
   s.homepage = "http://github.com/flowdock/rally-wsapi"
+  s.licenses = ["MIT"]
   s.rubygems_version = "2.2.1"
   s.summary = "Simple client for Rally WSAPI"
 

@@ -172,6 +172,14 @@ describe Wsapi::Session do
       }.to raise_error(Wsapi::ApiError)
     end
 
+    it "raises exception when response is 503" do
+      stub_request(:get, /.*/).to_return(status: 503)
+
+      expect {
+        @wsapi.get_user_subscription
+      }.to raise_error(Wsapi::ApiError)
+    end
+
     it "raises a specific exception if IP address is blocked" do
       stub_request(:get, /.*/)
         .to_return(status: 404, body: File.read(File.join("spec", "fixtures", "wsapi", "ip_address_restriction.html")))

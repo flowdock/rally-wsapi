@@ -113,6 +113,7 @@ module Wsapi
       end
       raise AuthorizationError.new("Unauthorized", response) if response.status == 401
       raise ApiError.new("Internal server error", response) if response.status == 500
+      raise ApiError.new("Service unavailable", response) if response.status == 503
       raise ObjectNotFoundError.new("Object not found") if object_not_found?(response)
       raise IpAddressLimited.new("IP Address limited", response) if ip_address_limited?(response)
       response

@@ -8,4 +8,5 @@ Jeweler::Tasks.new do |s|
   s.description = "Simple client for Rally WSAPI"
   s.authors = ["Antti Pitkänen"]
   s.files =  FileList["[A-Z]*", "{bin,generators,lib,test}/**/*"]
+  s.licenses = ["MIT"]
 end
