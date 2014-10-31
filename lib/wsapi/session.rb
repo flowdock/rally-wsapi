@@ -111,7 +111,7 @@ module Wsapi
         req.params['pagesize'] = opts[:pagesize] || 200
         req.params['fetch'] = opts[:fetch] || true # by default, fetch full objects
       end
-      raise AuthorizationError.new("Unauthorized", response) if response.status == 401
+      raise AuthorizationError.new("Unauthorized", response) if response.status == 401 || response.status == 403
       raise ApiError.new("Internal server error", response) if response.status == 500
       raise ApiError.new("Service unavailable", response) if response.status == 503
       raise ObjectNotFoundError.new("Object not found") if object_not_found?(response)

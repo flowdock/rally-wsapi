@@ -164,6 +164,14 @@ describe Wsapi::Session do
       }.to raise_error(Wsapi::AuthorizationError)
     end
 
+    it "raises exception when response is 403" do
+      stub_request(:get, /.*/).to_return(status: 403)
+
+      expect {
+        @wsapi.get_user_subscription
+      }.to raise_error(Wsapi::AuthorizationError)
+    end
+
     it "raises exception when response is 500" do
       stub_request(:get, /.*/).to_return(status: 500)
 
