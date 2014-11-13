@@ -38,7 +38,7 @@ module Wsapi
       @api_version = opts[:version] || "3.0"
       @session_id = session_id
       @workspace_id = opts[:workspace_id]
-      @conn = Faraday.new do |faraday|
+      @conn = Faraday.new(ssl: {version: :TLSv1}) do |faraday|
         faraday.request  :url_encoded # form-encode POST params
         faraday.use WsapiAuthentication, @session_id
         faraday.adapter :excon
