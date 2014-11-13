@@ -1,6 +1,7 @@
 gem 'rake'
 gem 'multi_json'
 gem 'faraday'
+gem 'excon'
 
 group :release do
   gem 'jeweler'

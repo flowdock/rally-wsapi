@@ -1,5 +1,6 @@
 require 'multi_json'
 require 'faraday'
+require 'excon'
 
 require_relative './mapper'
 
@@ -37,10 +38,10 @@ module Wsapi
       @api_version = opts[:version] || "3.0"
       @session_id = session_id
       @workspace_id = opts[:workspace_id]
-      @conn = Faraday.new(ssl: { verify: false} ) do |faraday|
+      @conn = Faraday.new do |faraday|
         faraday.request  :url_encoded # form-encode POST params
         faraday.use WsapiAuthentication, @session_id
-        faraday.adapter Faraday.default_adapter # make requests with Net::HTTP
+        faraday.adapter :excon
       end
     end
 
