@@ -1,5 +1,6 @@
 require 'multi_json'
 require 'faraday'
+require 'faraday_middleware'
 require 'excon'
 
 require_relative './mapper'
@@ -39,7 +40,7 @@ module Wsapi
       @session_id = session_id
       @workspace_id = opts[:workspace_id]
       @conn = Faraday.new(ssl: {version: :TLSv1}) do |faraday|
-        faraday.request  :url_encoded # form-encode POST params
+        faraday.request :json
         faraday.use WsapiAuthentication, @session_id
         faraday.adapter :excon
       end
@@ -94,7 +95,8 @@ module Wsapi
     end
 
     def update_artifact(type, id, update_hash)
-      wsapi_post(wsapi_resource_url("#{type}/#{id}"), "#{type}" => update_hash)
+      response = wsapi_post(wsapi_resource_url("#{type}/#{id}"), "#{type}" => update_hash)
+      Mapper.get_object(response)
     end
 
     private
