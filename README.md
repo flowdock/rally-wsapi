@@ -70,6 +70,11 @@ get_team_members(project_id, opts = {})
 get_editors(project_id, opts = {})
 ```
 
+### Update any artifact with parameters hash
+```
+update_artifact(artifact_type, artifact_id, parameters)
+```
+
 ## Result objects
 
 There's a couple of convenience classes for the following object types:

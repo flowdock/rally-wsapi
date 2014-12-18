@@ -1,5 +1,6 @@
 require 'multi_json'
 require 'faraday'
+require 'faraday_middleware'
 require 'excon'
 
 require_relative './mapper'
@@ -39,58 +40,63 @@ module Wsapi
       @session_id = session_id
       @workspace_id = opts[:workspace_id]
       @conn = Faraday.new(ssl: {version: :TLSv1}) do |faraday|
-        faraday.request  :url_encoded # form-encode POST params
+        faraday.request :json
         faraday.use WsapiAuthentication, @session_id
         faraday.adapter :excon
       end
     end
 
     def get_user_subscription
-      response = wsapi_request(wsapi_resource_url("Subscription"))
+      response = wsapi_get(wsapi_resource_url("Subscription"))
       Mapper.get_object(response)
     end
 
     def get_subscription(id)
-      response = wsapi_request(wsapi_resource_url("Subscription/#{id}"))
+      response = wsapi_get(wsapi_resource_url("Subscription/#{id}"))
       Mapper.get_object(response)
     end
 
     def get_projects(opts = {})
       fetch_with_pages(opts) do |page_query|
-        wsapi_request(wsapi_resource_url("Project"), opts.merge(page_query))
+        wsapi_get(wsapi_resource_url("Project"), opts.merge(page_query))
       end
     end
 
     def get_project(id)
-      response = wsapi_request(wsapi_resource_url("Project/#{id}"))
+      response = wsapi_get(wsapi_resource_url("Project/#{id}"))
       Mapper.get_object(response)
     end
 
     def get_current_user
-      response = wsapi_request(wsapi_resource_url("User"))
+      response = wsapi_get(wsapi_resource_url("User"))
       Mapper.get_object(response)
     end
 
     def get_user(id)
-      response = wsapi_request(wsapi_resource_url("User/#{id}"))
+      response = wsapi_get(wsapi_resource_url("User/#{id}"))
       Mapper.get_object(response)
     end
 
     def get_user_by_username(username)
-      response = wsapi_request(wsapi_resource_url("User"), query: "(UserName = \"#{username}\")", pagesize: 1)
+      response = wsapi_get(wsapi_resource_url("User"), query: "(UserName = \"#{username}\")", pagesize: 1)
       (Mapper.get_objects(response) ||[]).first
     end
 
     def get_team_members(project_id, opts = {})
       fetch_with_pages(opts) do |page_query|
-        wsapi_request(wsapi_resource_url("Project/#{project_id}/TeamMembers"), opts.merge(page_query))
+        wsapi_get(wsapi_resource_url("Project/#{project_id}/TeamMembers"), opts.merge(page_query))
       end
     end
 
     def get_editors(project_id, opts = {})
       fetch_with_pages(opts) do |page_query|
-        wsapi_request(wsapi_resource_url("Project/#{project_id}/Editors"), opts.merge(page_query))
+        wsapi_get(wsapi_resource_url("Project/#{project_id}/Editors"), opts.merge(page_query))
       end
+    end
+
+    def update_artifact(type, id, update_hash)
+      response = wsapi_post(wsapi_resource_url("#{type}/#{id}"), "#{type}" => update_hash)
+      Mapper.get_object(response)
     end
 
     private
@@ -103,7 +109,14 @@ module Wsapi
       File.join(WSAPI_URL, "v#{@api_version}", resource)
     end
 
-    def wsapi_request(url, opts = {})
+    def wsapi_post(url, opts = {})
+      response = @conn.post url, opts
+      check_response_for_errors!(response)
+
+      response
+    end
+
+    def wsapi_get(url, opts = {})
       response = @conn.get do |req|
         req.url url
         req.params['workspace'] = workspace_url if @workspace_id
@@ -112,12 +125,16 @@ module Wsapi
         req.params['pagesize'] = opts[:pagesize] || 200
         req.params['fetch'] = opts[:fetch] || true # by default, fetch full objects
       end
+      check_response_for_errors!(response)
+      response
+    end
+
+    def check_response_for_errors!(response)
       raise AuthorizationError.new("Unauthorized", response) if response.status == 401 || response.status == 403
       raise ApiError.new("Internal server error", response) if response.status == 500
       raise ApiError.new("Service unavailable", response) if response.status == 503
       raise ObjectNotFoundError.new("Object not found") if object_not_found?(response)
       raise IpAddressLimited.new("IP Address limited", response) if ip_address_limited?(response)
-      response
     end
 
     def ip_address_limited?(response)

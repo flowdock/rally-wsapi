@@ -197,6 +197,22 @@ describe Wsapi::Session do
     end
   end
 
+  describe "with updates" do
+    let(:defect_uuid) { SecureRandom.uuid }
+    let(:user_id) { SecureRandom.uuid }
+    let(:response_data) {"{}"}
+    it "sends post request to api" do
+      stubbed_request = stub_request(:post, wsapi_url_regexp("defect/#{defect_uuid}"))
+        .with(body: { "defect" => {"Owner" => "/user/#{user_id}"}})
+        .to_return({
+          status: 200,
+          body: response_data
+        })
+      @wsapi.update_artifact(:defect, defect_uuid, Owner: "/user/#{user_id}")
+      expect(stubbed_request).to have_been_made
+    end
+  end
+
   def wsapi_url_regexp(path, version = "v3.0")
     base = File.join(Wsapi::WSAPI_URL, version, path).to_s
     /#{Regexp.escape(base)}(?:\?.*|\Z)/
