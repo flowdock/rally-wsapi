@@ -40,6 +40,12 @@ get_user(user_id)
 get_user_by_username(username)
 ```
 
+#### Get users by query
+```
+get_users(query_string)
+```
+See WSAPI documentation for details about query_string syntax
+
 #### Get the subscription of the authenticated user
 ```
 get_user_subscription
