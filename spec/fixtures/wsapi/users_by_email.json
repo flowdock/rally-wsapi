@@ -1,0 +1,21 @@
+{
+  "QueryResult": {
+    "_rallyAPIMajor": "2",
+    "_rallyAPIMinor": "0",
+    "Errors": [],
+    "Warnings": [],
+    "TotalResultCount": 1,
+    "StartIndex": 1,
+    "PageSize": 20,
+    "Results": [
+      {
+        "_rallyAPIMajor": "2",
+        "_rallyAPIMinor": "0",
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/user/11220674082",
+        "_refObjectUUID": "fb96bb72-e8ed-4f17-bcf4-4d8293ae88e8",
+        "_refObjectName": "Antti",
+        "_type": "User"
+      }
+    ]
+  }
+}

@@ -72,6 +72,11 @@ module Wsapi
       Mapper.get_object(response)
     end
 
+    def get_users(query)
+      response = wsapi_get(wsapi_resource_url("User"), query: "(#{query})")
+      Mapper.get_objects(response)
+    end
+
     def get_user(id)
       response = wsapi_get(wsapi_resource_url("User/#{id}"))
       Mapper.get_object(response)

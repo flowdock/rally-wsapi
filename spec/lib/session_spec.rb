@@ -29,7 +29,8 @@ describe Wsapi::Session do
   describe "with users" do
     before :each do
       @user_data = File.read(File.join("spec", "fixtures", "wsapi", "user.json"))
-      @users_query_data = File.read(File.join("spec", "fixtures", "wsapi", "users_by_username.json"))
+      @users_query_name_data = File.read(File.join("spec", "fixtures", "wsapi", "users_by_username.json"))
+      @users_query_email_data = File.read(File.join("spec", "fixtures", "wsapi", "users_by_email.json"))
     end
 
     it "fetches user information" do
@@ -51,10 +52,19 @@ describe Wsapi::Session do
     it "fetches user by username" do
       stub_request(:get, wsapi_url_regexp('/User')).with(
         query: hash_including({"pagesize" => "1", "query" => "(UserName = \"antti\")"})
-      ).to_return(status: 200, body: @users_query_data)
+      ).to_return(status: 200, body: @users_query_name_data)
       user = @wsapi.get_user_by_username("antti")
       expect(user.username).to eq("antti")
       expect(user.email).to eq("apitkanen@rallydev.com")
+    end
+
+    it "fetches users with query" do
+      stub_request(:get, wsapi_url_regexp('/User')).with(
+        query: hash_including({"query" => "(EmailAddress = apitkanen@rallydev.com)"})
+      ).to_return(status: 200, body: @users_query_name_data)
+
+      users = @wsapi.get_users("EmailAddress = apitkanen@rallydev.com")
+      expect(users.first.email).to eq("apitkanen@rallydev.com")
     end
   end
 
