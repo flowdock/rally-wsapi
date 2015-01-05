@@ -1,7 +1,5 @@
 {
   "QueryResult": {
-    "_rallyAPIMajor": "2",
-    "_rallyAPIMinor": "0",
     "Errors": [],
     "Warnings": [],
     "TotalResultCount": 1,
@@ -9,11 +7,21 @@
     "PageSize": 20,
     "Results": [
       {
-        "_rallyAPIMajor": "2",
-        "_rallyAPIMinor": "0",
-        "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/user/11220674082",
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/user/fb96bb72-e8ed-4f17-bcf4-4d8293ae88e8",
         "_refObjectUUID": "fb96bb72-e8ed-4f17-bcf4-4d8293ae88e8",
+        "_objectVersion": "44",
         "_refObjectName": "Antti",
+        "ObjectID": "fb96bb72-e8ed-4f17-bcf4-4d8293ae88e8",
+        "Department": "None",
+        "Disabled": false,
+        "DisplayName": "Antti",
+        "EmailAddress": "apitkanen@rallydev.com",
+        "FirstName": "Antti",
+        "LastName": "Pitkanen",
+        "MiddleName": null,
+        "Phone": null,
+        "Role": "Developer",
+        "UserName": "apitkanen@rallydev.com",
         "_type": "User"
       }
     ]

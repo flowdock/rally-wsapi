@@ -60,7 +60,7 @@ describe Wsapi::Session do
 
     it "fetches users with query" do
       stub_request(:get, wsapi_url_regexp('/User')).with(
-        query: hash_including({"query" => "(EmailAddress = apitkanen@rallydev.com)"})
+        query: hash_including({"query" => "(EmailAddress = apitkanen@rallydev.com)", "fetch" => "true"})
       ).to_return(status: 200, body: @users_query_name_data)
 
       users = @wsapi.get_users("EmailAddress = apitkanen@rallydev.com")
