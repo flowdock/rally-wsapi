@@ -1,0 +1,173 @@
+{
+  "Defect": {
+    "_rallyAPIMajor": "2",
+    "_rallyAPIMinor": "0",
+    "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/defect/27016450299",
+    "_refObjectUUID": "bc56dfd4-bb6c-4489-83e9-9efa390151e7",
+    "_objectVersion": "23",
+    "_refObjectName": "This is a new defect",
+    "CreationDate": "2014-12-16T08:35:52.247Z",
+    "_CreatedAt": "Dec 16, 2014",
+    "ObjectID": 27016450299,
+    "VersionId": "23",
+    "Subscription": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/subscription/400059",
+      "_refObjectUUID": "76de2093-5f8d-403d-a2db-fcec9c5c7079",
+      "_refObjectName": "Rally Development",
+      "_type": "Subscription"
+    },
+    "Workspace": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/workspace/41529001",
+      "_refObjectUUID": "3497d043-3ea7-4c8a-bf78-069847936c13",
+      "_refObjectName": "Rally",
+      "_type": "Workspace"
+    },
+    "Changesets": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Defect/27016450299/Changesets",
+      "_type": "Changeset",
+      "Count": 0
+    },
+    "Description": "Tis doesnt work!!",
+    "Discussion": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Defect/27016450299/Discussion",
+      "_type": "ConversationPost",
+      "Count": 0
+    },
+    "DisplayColor": null,
+    "Expedite": false,
+    "FormattedID": "DE23354",
+    "LastUpdateDate": "2014-12-16T13:47:07.586Z",
+    "LatestDiscussionAgeInMinutes": null,
+    "Milestones": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Defect/27016450299/Milestones",
+      "_type": "Milestone",
+      "_tagsNameArray": [],
+      "Count": 0
+    },
+    "Name": "This is a new defect",
+    "Notes": "",
+    "Owner": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/user/19151999482",
+      "_refObjectUUID": "80f4b117-aed5-4fde-ab05-3e7a2f991855",
+      "_refObjectName": "Sampo V",
+      "_type": "User"
+    },
+    "Project": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/project/17501202851",
+      "_refObjectUUID": "8ac4704b-2268-434a-83af-aebb3520e3d6",
+      "_refObjectName": "Flowdock Integration Testing",
+      "_type": "Project"
+    },
+    "Ready": true,
+    "RevisionHistory": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/revisionhistory/27016450300",
+      "_refObjectUUID": "86abd31d-6995-4d4a-a641-60ff31f29994",
+      "_type": "RevisionHistory"
+    },
+    "Tags": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Defect/27016450299/Tags",
+      "_type": "Tag",
+      "_tagsNameArray": [],
+      "Count": 0
+    },
+    "ScheduleState": "Defined",
+    "AcceptedDate": null,
+    "AffectsDoc": false,
+    "Attachments": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Defect/27016450299/Attachments",
+      "_type": "Attachment",
+      "Count": 0
+    },
+    "Blocked": false,
+    "BlockedReason": null,
+    "Blocker": null,
+    "ClosedDate": null,
+    "DefectSuites": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Defect/27016450299/DefectSuites",
+      "_type": "DefectSuite",
+      "Count": 0
+    },
+    "DragAndDropRank": "O~xrU8O~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+    "Duplicates": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Defect/27016450299/Duplicates",
+      "_type": "Defect",
+      "Count": 0
+    },
+    "Environment": "Production",
+    "FixedInBuild": null,
+    "FoundInBuild": null,
+    "InProgressDate": null,
+    "Iteration": null,
+    "OpenedDate": null,
+    "Package": null,
+    "PlanEstimate": null,
+    "Priority": "None",
+    "Recycled": false,
+    "Release": null,
+    "ReleaseNote": false,
+    "Requirement": null,
+    "Resolution": "None",
+    "SalesforceCaseID": null,
+    "SalesforceCaseNumber": null,
+    "Severity": "None",
+    "State": "Submitted",
+    "SubmittedBy": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/user/19151999482",
+      "_refObjectUUID": "80f4b117-aed5-4fde-ab05-3e7a2f991855",
+      "_refObjectName": "Sampo V",
+      "_type": "User"
+    },
+    "TargetBuild": null,
+    "TargetDate": null,
+    "TaskActualTotal": 0,
+    "TaskEstimateTotal": 0,
+    "TaskRemainingTotal": 0,
+    "TaskStatus": "NONE",
+    "Tasks": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Defect/27016450299/Tasks",
+      "_type": "Task",
+      "Count": 0
+    },
+    "TestCase": null,
+    "TestCaseResult": null,
+    "TestCaseStatus": "NONE",
+    "TestCases": {
+      "_rallyAPIMajor": "2",
+      "_rallyAPIMinor": "0",
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/Defect/27016450299/TestCases",
+      "_type": "TestCase",
+      "Count": 0
+    },
+    "VerifiedInBuild": null,
+    "Errors": [],
+    "Warnings": []
+  }
+}

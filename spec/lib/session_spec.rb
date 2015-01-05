@@ -200,7 +200,7 @@ describe Wsapi::Session do
   describe "with updates" do
     let(:defect_uuid) { SecureRandom.uuid }
     let(:user_id) { SecureRandom.uuid }
-    let(:response_data) {"{}"}
+    let(:response_data) { File.read(File.join("spec", "fixtures", "wsapi", "defect.json")) }
     it "sends post request to api" do
       stubbed_request = stub_request(:post, wsapi_url_regexp("defect/#{defect_uuid}"))
         .with(body: { "defect" => {"Owner" => "/user/#{user_id}"}})
