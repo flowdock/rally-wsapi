@@ -14,7 +14,15 @@ s = Wsapi::Session.new("deadbeefdeadbeef")
 The constructor also accepts the following options:
   * `:workspace_id`, if not given, user's default workspace is used for queries
   * `:version`, WSAPI version, default is `3.0`
+  * `oauth2_refresh_token`, see: (using WSAPI with OAuth2)[https://github.com/flowdock/rally-wsapi#using-wsapi-with-oauth2]
 
+### Using WSAPI with OAuth2
+
+Authenticating to WSAPI is also possible with OAuth2. Access token used in
+requests is given in place of the API token. Refresh token can be supplied with
+`Wsapi::Session#.setup_refresh_token(client_id, client_secret, refresh_token)`
+method. It takes optional block parameter, which is called every time the
+access token is refreshed.
 
 ## Method reference for Session
 
@@ -80,6 +88,13 @@ get_editors(project_id, opts = {})
 ```
 update_artifact(artifact_type, artifact_id, parameters)
 ```
+
+### Setup refresh token to be used with OAuth2
+```
+setup_refresh_token(client_id, client_secret, refresh_token, &block)
+```
+
+See (Using WSAPI with OAuth2)[https://github.com/flowdock/rally-wsapi#using-wsapi-with-oauth2] for more info.
 
 ## Result objects
 
