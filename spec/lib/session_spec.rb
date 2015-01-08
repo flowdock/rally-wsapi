@@ -149,7 +149,7 @@ describe Wsapi::Session do
       before :each do
         @failing_request = stub_request(:get, wsapi_url_regexp('/User/1'))
           .with(headers: {'Zsessionid' => "deadbeefdeadbeef"})
-          .to_return(status: 403, body: authorization_error)
+          .to_return(status: 401, body: authorization_error)
         @successful_request = stub_request(:get, wsapi_url_regexp('/User/1'))
           .with(headers: { "Zsessionid" => "new_access_token"})
           .to_return(status: 200, body: user_data)

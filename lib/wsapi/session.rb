@@ -151,7 +151,7 @@ module Wsapi
 
     def wsapi_request_with_refresh_token(method, url, opts = {})
       response = @conn.send(method, url, opts)
-      if @oauth2_refresh_token && response.status == 403
+      if @oauth2_refresh_token && response.status == 401
         refresh_token_response = refresh_token!
 
         access_token = MultiJson.load(refresh_token_response.body)["access_token"]
