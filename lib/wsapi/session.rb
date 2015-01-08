@@ -43,6 +43,15 @@ module Wsapi
       @conn = connection(session_id)
     end
 
+    def setup_refresh_token(client_id, client_secret, refresh_token, &block)
+      @oauth2_refresh_token = {
+        client_id: client_id,
+        client_secret: client_secret,
+        refresh_token: refresh_token,
+        refresh_token_updated: block
+      }
+    end
+
     def get_user_subscription
       response = wsapi_get(wsapi_resource_url("Subscription"))
       Mapper.get_object(response)
@@ -161,7 +170,7 @@ module Wsapi
 
       refresh_params = {
         grant_type: "refresh_token",
-        refresh_token: @oauth2_refresh_token[:token],
+        refresh_token: @oauth2_refresh_token[:refresh_token],
         client_id: @oauth2_refresh_token[:client_id],
         client_secret: @oauth2_refresh_token[:client_secret]
       }
@@ -172,6 +181,9 @@ module Wsapi
       end
 
       check_response_for_errors!(response)
+      if @oauth2_refresh_token[:refresh_token_updated]
+        @oauth2_refresh_token[:refresh_token_updated].call(MultiJson.load(response.body))
+      end
       response
     end
 
