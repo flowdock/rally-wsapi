@@ -142,7 +142,7 @@ describe Wsapi::Session do
 
   describe "with errors" do
     context "with refresh_token" do
-      let(:authorization_error) { File.read(File.join("spec", "fixtures", "wsapi", "authorization_error.json")) }
+      let(:authorization_error) { File.read(File.join("spec", "fixtures", "wsapi", "authorization_error.html")) }
       let(:refresh_token) { File.read(File.join("spec", "fixtures", "wsapi", "refresh_token.json")) }
       let(:user_data) { File.read(File.join("spec", "fixtures", "wsapi", "user.json")) }
 
