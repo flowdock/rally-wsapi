@@ -1,0 +1,7 @@
+{
+  "id_token": "???",
+  "refresh_token": "new_refresh_token",
+  "expires_in": 15552000,
+  "token_type": "Bearer",
+  "access_token": "new_access_token"
+}

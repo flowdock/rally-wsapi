@@ -4,6 +4,7 @@ require 'uri'
 describe Wsapi::Session do
   before :all do
     @token = "deadbeefdeadbeef"
+    @refresh_token = "monkeymonkey"
   end
 
   before :each do
@@ -140,6 +141,40 @@ describe Wsapi::Session do
   end
 
   describe "with errors" do
+    context "with refresh_token" do
+      let(:authorization_error) { File.read(File.join("spec", "fixtures", "wsapi", "authorization_error.json")) }
+      let(:refresh_token) { File.read(File.join("spec", "fixtures", "wsapi", "refresh_token.json")) }
+      let(:user_data) { File.read(File.join("spec", "fixtures", "wsapi", "user.json")) }
+      it "requests a new access token with refresh token" do
+        failing_request = stub_request(:get, wsapi_url_regexp('/User/1'))
+          .with(headers: {'Zsessionid' => "deadbeefdeadbeef"})
+          .to_return(status: 403, body: authorization_error)
+        successful_request = stub_request(:get, wsapi_url_regexp('/User/1'))
+          .with(headers: { "Zsessionid" => "new_access_token"})
+          .to_return(status: 200, body: user_data)
+        refresh_token_request = stub_request(:post, Wsapi::AUTH_URL).to_return(status: 200, body: refresh_token)
+
+        @wsapi = Wsapi::Session.new(@token, oauth2_refresh_token: {token: @refresh_token, client_id: "foobar", client_secret: "thisisasecret"})
+        user = @wsapi.get_user(1)
+        expect(user.name).to eq("Antti Pitkanen")
+        expect(user.email).to eq("apitkanen@rallydev.com")
+
+        expect(failing_request).to have_been_made
+        expect(refresh_token_request).to have_been_made
+        expect(successful_request).to have_been_made
+      end
+    end
+
+    context "without refresh_token" do
+      it "raises exception when response is 403" do
+        stub_request(:get, /.*/).to_return(status: 403)
+
+        expect {
+          @wsapi.get_user_subscription
+        }.to raise_error(Wsapi::AuthorizationError)
+      end
+    end
+
     it "raises exception with query error" do
       @error_data = File.read(File.join("spec", "fixtures", "wsapi", "query_error.json"))
       stub_request(:get, /.*/).to_return(status: 200, body: @error_data)
@@ -168,14 +203,6 @@ describe Wsapi::Session do
 
     it "raises exception when response is 401" do
       stub_request(:get, /.*/).to_return(status: 401)
-
-      expect {
-        @wsapi.get_user_subscription
-      }.to raise_error(Wsapi::AuthorizationError)
-    end
-
-    it "raises exception when response is 403" do
-      stub_request(:get, /.*/).to_return(status: 403)
 
       expect {
         @wsapi.get_user_subscription
