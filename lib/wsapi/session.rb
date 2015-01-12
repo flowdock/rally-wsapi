@@ -19,6 +19,7 @@ module Wsapi
   class IpAddressLimited < StandardErrorWithResponse; end
 
   WSAPI_URL = ENV['WSAPI_URL'] || 'https://rally1.rallydev.com/slm/webservice/'
+  AUTH_URL = ENV['RALLY_AUTHENTICATION_URL'] || "https://rally1.rallydev.com/login/oauth2/token"
 
   class WsapiAuthentication < Faraday::Middleware
     def initialize(logger, session_id)
@@ -37,13 +38,17 @@ module Wsapi
 
     def initialize(session_id, opts = {})
       @api_version = opts[:version] || "3.0"
-      @session_id = session_id
       @workspace_id = opts[:workspace_id]
-      @conn = Faraday.new(ssl: {version: :TLSv1}) do |faraday|
-        faraday.request :json
-        faraday.use WsapiAuthentication, @session_id
-        faraday.adapter :excon
-      end
+      @conn = connection(session_id)
+    end
+
+    def setup_refresh_token(client_id, client_secret, refresh_token, &block)
+      @oauth2 = {
+        client_id: client_id,
+        client_secret: client_secret,
+        refresh_token: refresh_token,
+        refresh_token_updated: block
+      }
     end
 
     def get_user_subscription
@@ -106,6 +111,14 @@ module Wsapi
 
     private
 
+    def connection(session_id)
+      Faraday.new(ssl: {version: :TLSv1}) do |faraday|
+        faraday.request :json
+        faraday.use WsapiAuthentication, session_id
+        faraday.adapter :excon
+      end
+    end
+
     def workspace_url
       wsapi_resource_url("Workspace/#{@workspace_id}")
     end
@@ -115,22 +128,61 @@ module Wsapi
     end
 
     def wsapi_post(url, opts = {})
-      response = @conn.post url, opts
+      response = wsapi_request_with_refresh_token(:post, url, opts)
       check_response_for_errors!(response)
 
       response
     end
 
     def wsapi_get(url, opts = {})
-      response = @conn.get do |req|
-        req.url url
-        req.params['workspace'] = workspace_url if @workspace_id
-        req.params['query'] = opts[:query] if opts[:query]
-        req.params['start'] = opts[:start] || 1
-        req.params['pagesize'] = opts[:pagesize] || 200
-        req.params['fetch'] = opts[:fetch] || true # by default, fetch full objects
-      end
+      request_options = {}
+      request_options['workspace'] = workspace_url if @workspace_id
+      request_options['query'] = opts[:query] if opts[:query]
+      request_options['start'] = opts[:start] || 1
+      request_options['pagesize'] = opts[:pagesize] || 200
+      request_options['fetch'] = opts[:fetch] || true # by default, fetch full objects
+
+      response = wsapi_request_with_refresh_token(:get, url, request_options)
       check_response_for_errors!(response)
+
+      response
+    end
+
+    def wsapi_request_with_refresh_token(method, url, opts = {})
+      response = @conn.send(method, url, opts)
+      if defined?(@oauth2) && response.status == 401
+        refresh_token_response = refresh_token!
+
+        access_token = MultiJson.load(refresh_token_response.body)["access_token"]
+        @conn = connection(access_token)
+        response = @conn.send(method, url, opts) # Try again with fresh token
+      end
+
+      response
+    end
+
+    def refresh_token!
+      client = Faraday.new(ssl: {version: :TLSv1}) do |faraday|
+        faraday.request :json
+        faraday.adapter :excon
+      end
+
+      refresh_params = {
+        grant_type: "refresh_token",
+        refresh_token: @oauth2[:refresh_token],
+        client_id: @oauth2[:client_id],
+        client_secret: @oauth2[:client_secret]
+      }
+
+      response = client.post do |req|
+        req.url AUTH_URL
+        req.body = JSON.dump refresh_params
+      end
+
+      check_response_for_errors!(response)
+      if @oauth2[:refresh_token_updated]
+        @oauth2[:refresh_token_updated].call(MultiJson.load(response.body))
+      end
       response
     end
 
