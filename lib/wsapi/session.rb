@@ -39,12 +39,11 @@ module Wsapi
     def initialize(session_id, opts = {})
       @api_version = opts[:version] || "3.0"
       @workspace_id = opts[:workspace_id]
-      @oauth2_refresh_token = opts[:oauth2_refresh_token]
       @conn = connection(session_id)
     end
 
     def setup_refresh_token(client_id, client_secret, refresh_token, &block)
-      @oauth2_refresh_token = {
+      @oauth2 = {
         client_id: client_id,
         client_secret: client_secret,
         refresh_token: refresh_token,
@@ -151,7 +150,7 @@ module Wsapi
 
     def wsapi_request_with_refresh_token(method, url, opts = {})
       response = @conn.send(method, url, opts)
-      if @oauth2_refresh_token && response.status == 401
+      if defined?(@oauth2) && response.status == 401
         refresh_token_response = refresh_token!
 
         access_token = MultiJson.load(refresh_token_response.body)["access_token"]
@@ -170,9 +169,9 @@ module Wsapi
 
       refresh_params = {
         grant_type: "refresh_token",
-        refresh_token: @oauth2_refresh_token[:refresh_token],
-        client_id: @oauth2_refresh_token[:client_id],
-        client_secret: @oauth2_refresh_token[:client_secret]
+        refresh_token: @oauth2[:refresh_token],
+        client_id: @oauth2[:client_id],
+        client_secret: @oauth2[:client_secret]
       }
 
       response = client.post do |req|
@@ -181,8 +180,8 @@ module Wsapi
       end
 
       check_response_for_errors!(response)
-      if @oauth2_refresh_token[:refresh_token_updated]
-        @oauth2_refresh_token[:refresh_token_updated].call(MultiJson.load(response.body))
+      if @oauth2[:refresh_token_updated]
+        @oauth2[:refresh_token_updated].call(MultiJson.load(response.body))
       end
       response
     end

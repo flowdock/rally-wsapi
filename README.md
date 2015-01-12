@@ -14,7 +14,7 @@ s = Wsapi::Session.new("deadbeefdeadbeef")
 The constructor also accepts the following options:
   * `:workspace_id`, if not given, user's default workspace is used for queries
   * `:version`, WSAPI version, default is `3.0`
-  * `oauth2_refresh_token`, see: (using WSAPI with OAuth2)[https://github.com/flowdock/rally-wsapi#using-wsapi-with-oauth2]
+  * `oauth2`, see: (using WSAPI with OAuth2)[https://github.com/flowdock/rally-wsapi#using-wsapi-with-oauth2]
 
 ### Using WSAPI with OAuth2
 
