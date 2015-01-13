@@ -4,7 +4,6 @@ require 'faraday_middleware'
 require 'excon'
 
 require_relative './mapper'
-
 module Wsapi
   class StandardErrorWithResponse < StandardError
     attr_reader :response
@@ -163,7 +162,7 @@ module Wsapi
 
     def refresh_token!
       client = Faraday.new(ssl: {version: :TLSv1}) do |faraday|
-        faraday.request :json
+        faraday.request :url_encoded
         faraday.adapter :excon
       end
 
@@ -174,12 +173,13 @@ module Wsapi
         client_secret: @oauth2[:client_secret]
       }
 
-      response = client.post do |req|
-        req.url AUTH_URL
-        req.body = JSON.dump refresh_params
-      end
+      response = client.post AUTH_URL, refresh_params
 
       check_response_for_errors!(response)
+
+      response_body = MultiJson.load(response.body)
+
+      @oauth2[:refresh_token] = response_body["refresh_token"]
       if @oauth2[:refresh_token_updated]
         @oauth2[:refresh_token_updated].call(MultiJson.load(response.body))
       end
