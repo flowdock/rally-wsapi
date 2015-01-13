@@ -6,7 +6,7 @@ Jeweler::Tasks.new do |s|
   s.email = "antti@flowdock.com"
   s.homepage = "http://github.com/flowdock/rally-wsapi"
   s.description = "Simple client for Rally WSAPI"
-  s.authors = ["Antti Pitkänen"]
+  s.authors = ["Antti Pitkänen", "Oskari Virtanen"]
   s.files =  FileList["[A-Z]*", "{bin,generators,lib,test}/**/*"]
   s.licenses = ["MIT"]
 end
