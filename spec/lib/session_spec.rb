@@ -27,6 +27,15 @@ describe Wsapi::Session do
     end
   end
 
+  describe "with timeout" do
+    it "raises timeout aften given period" do
+      stub_request(:get, wsapi_url_regexp("/User/1", "v2.0")).to_timeout
+      expect do
+        Wsapi::Session.new(SecureRandom.hex, version: "2.0", timeout: 5).get_user 1
+      end.to raise_error Faraday::TimeoutError
+    end
+  end
+
   describe "with users" do
     before :each do
       @user_data = File.read(File.join("spec", "fixtures", "wsapi", "user.json"))

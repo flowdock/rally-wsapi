@@ -38,6 +38,7 @@ module Wsapi
     def initialize(session_id, opts = {})
       @api_version = opts[:version] || "3.0"
       @workspace_id = opts[:workspace_id]
+      @timeout = opts[:timeout]
       @conn = connection(session_id)
     end
 
@@ -148,13 +149,13 @@ module Wsapi
     end
 
     def wsapi_request_with_refresh_token(method, url, opts = {})
-      response = @conn.send(method, url, opts)
+      response = @conn.send(method, url, opts) { |req| req.options.timeout = @timeout }
       if defined?(@oauth2) && response.status == 401
         refresh_token_response = refresh_token!
 
         access_token = MultiJson.load(refresh_token_response.body)["access_token"]
         @conn = connection(access_token)
-        response = @conn.send(method, url, opts) # Try again with fresh token
+        response = @conn.send(method, url, opts) { |req| req.options.timeout = @timeout } # Try again with fresh token
       end
 
       response
@@ -173,7 +174,7 @@ module Wsapi
         client_secret: @oauth2[:client_secret]
       }
 
-      response = client.post AUTH_URL, refresh_params
+      response = client.post AUTH_URL, refresh_params { |req| req.options.timeout = @timeout }
 
       check_response_for_errors!(response)
 
