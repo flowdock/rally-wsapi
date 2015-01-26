@@ -16,6 +16,7 @@ module Wsapi
   class ApiError < StandardErrorWithResponse; end
   class ObjectNotFoundError < StandardErrorWithResponse; end
   class IpAddressLimited < StandardErrorWithResponse; end
+  class TimeoutError < StandardError; end
 
   WSAPI_URL = ENV['WSAPI_URL'] || 'https://rally1.rallydev.com/slm/webservice/'
   AUTH_URL = ENV['RALLY_AUTHENTICATION_URL'] || "https://rally1.rallydev.com/login/oauth2/token"
@@ -159,6 +160,8 @@ module Wsapi
       end
 
       response
+    rescue Faraday::TimeoutError
+      raise TimeoutError.new("Request timed out")
     end
 
     def refresh_token!
