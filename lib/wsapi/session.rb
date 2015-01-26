@@ -174,7 +174,7 @@ module Wsapi
         client_secret: @oauth2[:client_secret]
       }
 
-      response = client.post AUTH_URL, refresh_params { |req| req.options.timeout = @timeout }
+      response = client.post(AUTH_URL, refresh_params) { |req| req.options.timeout = @timeout }
 
       check_response_for_errors!(response)
 
