@@ -78,9 +78,15 @@ module Wsapi
       Mapper.get_object(response)
     end
 
-    def get_users(query)
-      response = wsapi_get(wsapi_resource_url("User"), query: "(#{query})")
-      Mapper.get_objects(response)
+    def get_users(query = nil)
+      fetch_with_pages do |page_query|
+        if query
+          query_hash = { query: "(#{query})" }
+          wsapi_get(wsapi_resource_url("User"), query_hash.merge(page_query))
+        else
+          wsapi_get(wsapi_resource_url("Users"), page_query)
+        end
+      end
     end
 
     def get_user(id)

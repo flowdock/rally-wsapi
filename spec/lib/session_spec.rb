@@ -40,7 +40,6 @@ describe Wsapi::Session do
     before :each do
       @user_data = File.read(File.join("spec", "fixtures", "wsapi", "user.json"))
       @users_query_name_data = File.read(File.join("spec", "fixtures", "wsapi", "users_by_username.json"))
-      @users_query_email_data = File.read(File.join("spec", "fixtures", "wsapi", "users_by_email.json"))
     end
 
     it "fetches user information" do
@@ -66,6 +65,15 @@ describe Wsapi::Session do
       user = @wsapi.get_user_by_username("antti")
       expect(user.username).to eq("antti")
       expect(user.email).to eq("apitkanen@rallydev.com")
+    end
+
+    it "fetches all users" do
+      users = File.read(File.join("spec", "fixtures", "wsapi", "users.json"))
+      stub_request(:get, wsapi_url_regexp('/Users')).to_return(status: 200, body: users)
+      response = @wsapi.get_users
+      users_json = JSON.parse(users)["QueryResult"]
+      expect(response.length).to eq users_json["Results"].length
+      expect(response.first.email).to eq users_json["Results"].first["EmailAddress"]
     end
 
     it "fetches users with query" do
