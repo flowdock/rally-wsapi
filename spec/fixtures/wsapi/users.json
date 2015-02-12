@@ -1,0 +1,65 @@
+{
+  "QueryResult": {
+    "Errors": [],
+    "Warnings": [],
+    "TotalResultCount": 3,
+    "StartIndex": 1,
+    "PageSize": 3,
+    "Results": [
+      {
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/user/12345",
+        "_refObjectUUID": "c9934360-76a9-41e2-a0e5-9d630e8663de",
+        "_objectVersion": "76",
+        "_refObjectName": "John",
+        "ObjectID": "c9934360-76a9-41e2-a0e5-9d630e8663de",
+        "Department": "None",
+        "Disabled": false,
+        "DisplayName": "John",
+        "EmailAddress": "john@example.com",
+        "FirstName": "John",
+        "LastName": "Doe",
+        "MiddleName": null,
+        "Phone": null,
+        "Role": "None",
+        "UserName": "john",
+        "_type": "User"
+      },
+      {
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/user/12346",
+        "_refObjectUUID": "1637fdf8-0820-4a48-9420-eb5bbd4575d6",
+        "_objectVersion": "801",
+        "_refObjectName": "Smitty",
+        "ObjectID": "1637fdf8-0820-4a48-9420-eb5bbd4575d6",
+        "Department": "Engineering",
+        "Disabled": false,
+        "DisplayName": "Smith",
+        "EmailAddress": "smith@example.com",
+        "FirstName": "Alex",
+        "LastName": "Smith",
+        "MiddleName": null,
+        "Phone": null,
+        "Role": "Team Lead",
+        "UserName": "mike",
+        "_type": "User"
+      },
+      {
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/user/12347",
+        "_refObjectUUID": "ef769856-24b6-4a0b-abcb-2f5e0856abcd",
+        "_objectVersion": "3082",
+        "_refObjectName": "Tarun",
+        "ObjectID": "ef769856-24b6-4a0b-abcb-2f5e0856abcd",
+        "Department": "Engineering",
+        "Disabled": false,
+        "DisplayName": "Foo",
+        "EmailAddress": "foobar@example.com",
+        "FirstName": "Foo",
+        "LastName": "Bar",
+        "MiddleName": null,
+        "Phone": null,
+        "Role": "Architect",
+        "UserName": "Foobar",
+        "_type": "User"
+      }
+    ]
+  }
+}
