@@ -51,9 +51,9 @@ get_user_by_username(username)
 
 #### Get users by query
 ```
-get_users(query_string)
+get_users(query_string = nil)
 ```
-See WSAPI documentation for details about query_string syntax
+If the query_string is present, applies it to the request. Otherwise returns all users. See WSAPI documentation for details about query_string syntax.
 
 #### Get the subscription of the authenticated user
 ```
