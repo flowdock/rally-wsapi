@@ -12,6 +12,7 @@ module Wsapi
       super(msg)
     end
   end
+  class BadRequestError < StandardErrorWithResponse; end
   class AuthorizationError < StandardErrorWithResponse; end
   class ApiError < StandardErrorWithResponse; end
   class ObjectNotFoundError < StandardErrorWithResponse; end
@@ -197,6 +198,7 @@ module Wsapi
     end
 
     def check_response_for_errors!(response)
+      raise BadRequestError.new("Bad request", response) if response.status == 400
       raise AuthorizationError.new("Unauthorized", response) if response.status == 401 || response.status == 403
       raise ApiError.new("Internal server error", response) if response.status == 500
       raise ApiError.new("Service unavailable", response) if response.status == 503
