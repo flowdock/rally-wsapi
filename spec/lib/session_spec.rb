@@ -273,6 +273,13 @@ describe Wsapi::Session do
         @wsapi.get_user_subscription
       }.to raise_error(Wsapi::IpAddressLimited)
     end
+
+    it "raises exception when response is 400" do
+      stub_request(:get, /.*/).to_return(status: 400)
+      expect {
+        @wsapi.get_user_subscription
+      }.to raise_error(Wsapi::BadRequestError)
+    end
   end
 
   describe "with updates" do
