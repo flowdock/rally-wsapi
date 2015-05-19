@@ -3,5 +3,9 @@ module Wsapi
     def subscription_id
       @raw_data["SubscriptionID"].to_s
     end
+
+    def obj_id
+      @raw_data["ObjectID"]
+    end
   end
 end

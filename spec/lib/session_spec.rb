@@ -120,17 +120,26 @@ describe Wsapi::Session do
   describe "with subscriptions" do
     before :each do
       @subscription_data = File.read(File.join("spec", "fixtures", "wsapi", "subscription.json"))
-      stub_request(:get, wsapi_url_regexp('/Subscription/1')).to_return(status: 200, body: @subscription_data)
-      stub_request(:get, wsapi_url_regexp('/Subscription')).to_return(status: 200, body: @subscription_data)
+      @subscriptions_data = File.read(File.join("spec", "fixtures", "wsapi", "subscriptions.json"))
     end
 
     it "fetches user subscription" do
+      stub_request(:get, wsapi_url_regexp('/Subscription')).to_return(status: 200, body: @subscription_data)
       subscription = @wsapi.get_user_subscription
       expect(subscription.name).to eq("Rally Development")
     end
 
     it "fetches given subscription" do
+      stub_request(:get, wsapi_url_regexp('/Subscription/1')).to_return(status: 200, body: @subscription_data)
       subscription = @wsapi.get_subscription(1)
+      expect(subscription.name).to eq("Rally Development")
+    end
+
+    it "fetches given subscription by subscription id" do
+      stub_request(:get, wsapi_url_regexp('/Subscription')).with(
+        query: {"pagesize" => "1", "start" => "1", "fetch" => "true", "query" => "(SubscriptionId = 2)"}
+      ).to_return(status: 200, body: @subscriptions_data)
+      subscription = @wsapi.get_subscription_by_subscription_id(2)
       expect(subscription.name).to eq("Rally Development")
     end
   end

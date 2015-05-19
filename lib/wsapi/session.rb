@@ -63,6 +63,11 @@ module Wsapi
       Mapper.get_object(response)
     end
 
+    def get_subscription_by_subscription_id(subscription_id)
+      response = wsapi_get(wsapi_resource_url("Subscription"), query: "(SubscriptionId = #{subscription_id})", pagesize: 1)
+      (Mapper.get_objects(response) ||[]).first
+    end
+
     def get_projects(opts = {})
       fetch_with_pages(opts) do |page_query|
         wsapi_get(wsapi_resource_url("Project"), opts.merge(page_query))

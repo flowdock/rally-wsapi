@@ -60,9 +60,14 @@ If the query_string is present, applies it to the request. Otherwise returns all
 get_user_subscription
 ```
 
-#### Get a subscription
+#### Get a subscription by object id
 ```
-get_project(subscription_id)
+get_subscription(object_id)
+```
+
+#### Get a subscription by subscription id
+```
+get_subscription_by_subscription_id(subscription_id)
 ```
 
 #### Get a project
