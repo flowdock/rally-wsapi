@@ -7,5 +7,9 @@ module Wsapi
     def obj_id
       @raw_data["ObjectID"]
     end
+
+    def subscription_type
+      @raw_data["SubscriptionType"]
+    end
   end
 end
