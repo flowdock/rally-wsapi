@@ -20,6 +20,10 @@ module Wsapi
       @raw_data["EmailAddress"]
     end
 
+    def subscription_id
+      @raw_data["SubscriptionID"]
+    end
+
     def admin?
       @raw_data["SubscriptionAdmin"]
     end
