@@ -1,0 +1,47 @@
+{
+  "CreateResult": {
+    "Errors": [
+
+    ],
+    "Warnings": [
+
+    ],
+    "Object": {
+      "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/conversationpost/f1b51111-2222-3333-4444-555566667777",
+      "_refObjectUUID": "f1b5ddf1-2eaa-4d57-9267-7558ad67b25a",
+      "_objectVersion": "1",
+      "CreationDate": "2017-06-12T20:30:27.314Z",
+      "_CreatedAt": "just now",
+      "ObjectID": "f1b51111-2222-3333-4444-55556666b25a",
+      "ObjectUUID": "f1b51111-2222-3333-4444-55556666b25a",
+      "VersionId": "1",
+      "Subscription": {
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/subscription/11111111-2222-3333-4444-555566667777",
+        "_refObjectUUID": "11111111-2222-3333-4444-555566667777",
+        "_refObjectName": "My Rally 321321",
+        "_type": "Subscription"
+      },
+      "Workspace": {
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/workspace/22222222-2222-3333-4444-555566667777",
+        "_refObjectUUID": "22222222-2222-3333-4444-555566667777",
+        "_refObjectName": "Rally",
+        "_type": "Workspace"
+      },
+      "Artifact": {
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/hierarchicalrequirement/33333333-2222-3333-4444-555566667777",
+        "_refObjectUUID": "33333333-2222-3333-4444-555566667777",
+        "_refObjectName": "Setup #create in rally_wsapi",
+        "_type": "HierarchicalRequirement"
+      },
+      "PostNumber": 6,
+      "Text": "This is a great User Story!",
+      "User": {
+        "_ref": "https://rally1.rallydev.com/slm/webservice/v3.0/user/44444444-203f-46e9-ac64-4f8cf5577d9f",
+        "_refObjectUUID": "44444444-203f-46e9-ac64-4f8cf5577d9f",
+        "_refObjectName": "Imma Developer",
+        "_type": "User"
+      },
+      "_type": "ConversationPost"
+    }
+  }
+}

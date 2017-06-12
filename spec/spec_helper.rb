@@ -21,6 +21,7 @@ Dir[File.join("../lib/wsapi/models", "**/*.rb")].each do |f|
 end
 
 require 'webmock/rspec'
+require 'byebug'
 
 RSpec.configure do |config|
 # The settings below are suggested to provide a good initial experience

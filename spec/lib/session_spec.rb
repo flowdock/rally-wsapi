@@ -291,7 +291,7 @@ describe Wsapi::Session do
     end
   end
 
-  describe "with updates" do
+  describe "#update" do
     let(:defect_uuid) { SecureRandom.uuid }
     let(:user_id) { SecureRandom.uuid }
     let(:response_data) { File.read(File.join("spec", "fixtures", "wsapi", "defect.json")) }
@@ -302,8 +302,39 @@ describe Wsapi::Session do
           status: 200,
           body: response_data
         })
-      @wsapi.update_artifact(:defect, defect_uuid, Owner: "/user/#{user_id}")
+      @wsapi.update(:defect, defect_uuid, Owner: "/user/#{user_id}")
       expect(stubbed_request).to have_been_made
+    end
+  end
+
+  describe "#create" do
+    let(:response_data) { File.read(File.join("spec", "fixtures", "wsapi", "conversationpost.json")) }
+
+    it "sends request to api" do
+      object_url = "https://rally1.rallydev.com/slm/webservice/v3.0/hierarchicalrequirement/125677197776"
+      discussion_text = "This defect is interesting. We should fix it."
+      stubbed_request = stub_request(:put, wsapi_url_regexp("conversationpost/create"))
+        .with(body: {"conversationpost" => {"artifact" => object_url, "text" => discussion_text}})
+        .to_return({
+          status: 200,
+          body: response_data
+      })
+      @wsapi.create(:conversationpost, artifact: object_url, text: discussion_text)
+      expect(stubbed_request).to have_been_made
+    end
+  end
+
+  describe "#build_object_url" do
+    let(:expected_url) { "https://rally1.rallydev.com/slm/webservice/v3.0/hierarchicalrequirement/125677197776" }
+
+    it "can build an artifact url" do
+      object_url = @wsapi.build_object_url("hierarchicalrequirement", "125677197776")
+      expect(object_url).to eq(expected_url)
+    end
+
+    it "can build an artifact url for userstory" do
+      object_url = @wsapi.build_object_url("userstory", "125677197776")
+      expect(object_url).to eq(expected_url)
     end
   end
 

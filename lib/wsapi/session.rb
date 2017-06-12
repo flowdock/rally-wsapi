@@ -44,18 +44,35 @@ module Wsapi
       @conn = connection(session_id)
     end
 
-    def setup_refresh_token(client_id, client_secret, refresh_token, &block)
-      @oauth2 = {
-        client_id: client_id,
-        client_secret: client_secret,
-        refresh_token: refresh_token,
-        refresh_token_updated: block
-      }
+    def build_object_url(type, id)
+      wsapi_resource_url("#{type}/#{id}").sub('userstory', 'hierarchicalrequirement')
     end
 
-    def get_user_subscription
-      response = wsapi_get(wsapi_resource_url("Subscription"))
+    def create(type, fields)
+      response = wsapi_request(:put, wsapi_resource_url("#{type}/create"), type => fields)
       Mapper.get_object(response)
+    end
+
+    def get_current_user
+      response = wsapi_get(wsapi_resource_url("User"))
+      Mapper.get_object(response)
+    end
+
+    def get_editors(project_id, opts = {})
+      fetch_with_pages(opts) do |page_query|
+        wsapi_get(wsapi_resource_url("Project/#{project_id}/Editors"), opts.merge(page_query))
+      end
+    end
+
+    def get_project(id)
+      response = wsapi_get(wsapi_resource_url("Project/#{id}"))
+      Mapper.get_object(response)
+    end
+
+    def get_projects(opts = {})
+      fetch_with_pages(opts) do |page_query|
+        wsapi_get(wsapi_resource_url("Project"), opts.merge(page_query))
+      end
     end
 
     def get_subscription(id)
@@ -68,19 +85,24 @@ module Wsapi
       (Mapper.get_objects(response) ||[]).first
     end
 
-    def get_projects(opts = {})
+    def get_team_members(project_id, opts = {})
       fetch_with_pages(opts) do |page_query|
-        wsapi_get(wsapi_resource_url("Project"), opts.merge(page_query))
+        wsapi_get(wsapi_resource_url("Project/#{project_id}/TeamMembers"), opts.merge(page_query))
       end
     end
 
-    def get_project(id)
-      response = wsapi_get(wsapi_resource_url("Project/#{id}"))
+    def get_user(id)
+      response = wsapi_get(wsapi_resource_url("User/#{id}"))
       Mapper.get_object(response)
     end
 
-    def get_current_user
-      response = wsapi_get(wsapi_resource_url("User"))
+    def get_user_by_username(username)
+      response = wsapi_get(wsapi_resource_url("User"), query: "(UserName = \"#{username}\")", pagesize: 1)
+      (Mapper.get_objects(response) ||[]).first
+    end
+
+    def get_user_subscription
+      response = wsapi_get(wsapi_resource_url("Subscription"))
       Mapper.get_object(response)
     end
 
@@ -95,34 +117,36 @@ module Wsapi
       end
     end
 
-    def get_user(id)
-      response = wsapi_get(wsapi_resource_url("User/#{id}"))
+    def setup_refresh_token(client_id, client_secret, refresh_token, &block)
+      @oauth2 = {
+        client_id: client_id,
+        client_secret: client_secret,
+        refresh_token: refresh_token,
+        refresh_token_updated: block
+      }
+    end
+
+    def update(type, id, update_hash)
+      response = wsapi_request(:post, wsapi_resource_url("#{type}/#{id}"), type => update_hash)
       Mapper.get_object(response)
     end
 
-    def get_user_by_username(username)
-      response = wsapi_get(wsapi_resource_url("User"), query: "(UserName = \"#{username}\")", pagesize: 1)
-      (Mapper.get_objects(response) ||[]).first
-    end
-
-    def get_team_members(project_id, opts = {})
-      fetch_with_pages(opts) do |page_query|
-        wsapi_get(wsapi_resource_url("Project/#{project_id}/TeamMembers"), opts.merge(page_query))
-      end
-    end
-
-    def get_editors(project_id, opts = {})
-      fetch_with_pages(opts) do |page_query|
-        wsapi_get(wsapi_resource_url("Project/#{project_id}/Editors"), opts.merge(page_query))
-      end
-    end
-
+    # This method is deprecated and will be removed in a future release.
     def update_artifact(type, id, update_hash)
-      response = wsapi_post(wsapi_resource_url("#{type}/#{id}"), "#{type}" => update_hash)
-      Mapper.get_object(response)
+      puts "WsapiAuthentication::Session#update_artifact has been deprecated. Please use #update instead."
+      update(type, id, update_hash)
     end
 
     private
+
+    def check_response_for_errors!(response)
+      raise BadRequestError.new("Bad request", response) if response.status == 400
+      raise AuthorizationError.new("Unauthorized", response) if response.status == 401 || response.status == 403
+      raise ApiError.new("Internal server error", response) if response.status == 500
+      raise ApiError.new("Service unavailable", response) if response.status == 503
+      raise ObjectNotFoundError.new("Object not found") if object_not_found?(response)
+      raise IpAddressLimited.new("IP Address limited", response) if ip_address_limited?(response)
+    end
 
     def connection(session_id)
       Faraday.new(ssl: {version: :TLSv1}) do |faraday|
@@ -132,48 +156,38 @@ module Wsapi
       end
     end
 
-    def workspace_url
-      wsapi_resource_url("Workspace/#{@workspace_id}")
-    end
-
-    def wsapi_resource_url(resource)
-      File.join(WSAPI_URL, "v#{@api_version}", resource)
-    end
-
-    def wsapi_post(url, opts = {})
-      response = wsapi_request_with_refresh_token(:post, url, opts)
-      check_response_for_errors!(response)
-
-      response
-    end
-
-    def wsapi_get(url, opts = {})
-      request_options = {}
-      request_options['workspace'] = workspace_url if @workspace_id
-      request_options['query'] = opts[:query] if opts[:query]
-      request_options['start'] = opts[:start] || 1
-      request_options['pagesize'] = opts[:pagesize] || 200
-      request_options['fetch'] = opts[:fetch] || true # by default, fetch full objects
-
-      response = wsapi_request_with_refresh_token(:get, url, request_options)
-      check_response_for_errors!(response)
-
-      response
-    end
-
-    def wsapi_request_with_refresh_token(method, url, opts = {})
-      response = @conn.send(method, url, opts) { |req| req.options.timeout = @timeout }
-      if defined?(@oauth2) && response.status == 401
-        refresh_token_response = refresh_token!
-
-        access_token = MultiJson.load(refresh_token_response.body)["access_token"]
-        @conn = connection(access_token)
-        response = @conn.send(method, url, opts) { |req| req.options.timeout = @timeout } # Try again with fresh token
+    def fetch_with_pages(opts = {}, &block)
+      page_query = {
+        start: opts[:start] || 1,
+        pagesize: opts[:pagesize] || 100
+      }
+      resultCount = nil
+      objects = []
+      while(!resultCount || resultCount > objects.size) do
+        response = yield(page_query)
+        resultCount = MultiJson.load(response.body)["QueryResult"]["TotalResultCount"]
+        objects += Mapper.get_objects(response)
+        page_query[:start] += page_query[:pagesize]
       end
+      objects
+    end
 
-      response
-    rescue Faraday::TimeoutError
-      raise TimeoutError.new("Request timed out")
+    def ip_address_limited?(response)
+      limit_message = /Your IP address, (?:\d+\.?)+, is not within the allowed range that your subscription administrator has configured./
+      response.status > 401 && response.body.match(limit_message)
+    end
+
+    def object_not_found?(response)
+      if response.status == 200
+        result = MultiJson.load(response.body)["OperationResult"]
+        if result && error = result["Errors"].first
+          error.match("Cannot find object to read")
+        else
+          false
+        end
+      else
+        false
+      end
     end
 
     def refresh_token!
@@ -202,47 +216,38 @@ module Wsapi
       response
     end
 
-    def check_response_for_errors!(response)
-      raise BadRequestError.new("Bad request", response) if response.status == 400
-      raise AuthorizationError.new("Unauthorized", response) if response.status == 401 || response.status == 403
-      raise ApiError.new("Internal server error", response) if response.status == 500
-      raise ApiError.new("Service unavailable", response) if response.status == 503
-      raise ObjectNotFoundError.new("Object not found") if object_not_found?(response)
-      raise IpAddressLimited.new("IP Address limited", response) if ip_address_limited?(response)
+    def workspace_url
+      wsapi_resource_url("Workspace/#{@workspace_id}")
     end
 
-    def ip_address_limited?(response)
-      limit_message = /Your IP address, (?:\d+\.?)+, is not within the allowed range that your subscription administrator has configured./
-      response.status > 401 && response.body.match(limit_message)
+    def wsapi_resource_url(resource)
+      File.join(WSAPI_URL, "v#{@api_version}", resource)
+    end
+    
+    def wsapi_get(url, opts = {})
+      request_options = {}
+      request_options['workspace'] = workspace_url if @workspace_id
+      request_options['query'] = opts[:query] if opts[:query]
+      request_options['start'] = opts[:start] || 1
+      request_options['pagesize'] = opts[:pagesize] || 200
+      request_options['fetch'] = opts[:fetch] || true # by default, fetch full objects
+
+      wsapi_request(:get, url, request_options)
     end
 
-    def object_not_found?(response)
-      if response.status == 200
-        result = MultiJson.load(response.body)["OperationResult"]
-        if result && error = result["Errors"].first
-          error.match("Cannot find object to read")
-        else
-          false
-        end
-      else
-        false
+    def wsapi_request(method, url, opts = {})
+      response = @conn.send(method, url, opts) { |req| req.options.timeout = @timeout }
+      if defined?(@oauth2) && response.status == 401
+        refresh_token_response = refresh_token!
+
+        access_token = MultiJson.load(refresh_token_response.body)["access_token"]
+        @conn = connection(access_token)
+        response = @conn.send(method, url, opts) { |req| req.options.timeout = @timeout } # Try again with fresh token
       end
-    end
-
-    def fetch_with_pages(opts = {}, &block)
-      page_query = {
-        start: opts[:start] || 1,
-        pagesize: opts[:pagesize] || 100
-      }
-      resultCount = nil
-      objects = []
-      while(!resultCount || resultCount > objects.size) do
-        response = yield(page_query)
-        resultCount = MultiJson.load(response.body)["QueryResult"]["TotalResultCount"]
-        objects += Mapper.get_objects(response)
-        page_query[:start] += page_query[:pagesize]
-      end
-      objects
+      check_response_for_errors!(response)
+      response
+    rescue Faraday::TimeoutError
+      raise TimeoutError.new("Request timed out")
     end
   end
 end

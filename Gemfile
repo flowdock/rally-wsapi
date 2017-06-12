@@ -12,5 +12,6 @@ end
 
 group :test do
   gem 'rspec'
+  gem 'byebug'
   gem 'webmock'
 end

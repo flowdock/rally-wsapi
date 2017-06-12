@@ -1,6 +1,6 @@
 # rally-wsapi
 
-Rally WSAPI client written in Ruby.
+CA Agile Central (formerly Rally) WSAPI client written in Ruby.
 
 ## Usage
 
@@ -90,9 +90,21 @@ get_team_members(project_id, opts = {})
 get_editors(project_id, opts = {})
 ```
 
-### Update any artifact with parameters hash
+### Update any object with parameters hash
+This method replaces #update_artifact, which has been deprecated.
 ```
-update_artifact(artifact_type, artifact_id, parameters)
+update(object_type, object_id, parameters)
+```
+
+### Create an object with a fields hash
+```
+create(object_type, object_fields)
+```
+
+### Build a wsapi object url
+This URL could be used when associating artifacts in the #create or #update methods
+```
+build_object_url(object_type, object_id)
 ```
 
 ### Setup refresh token to be used with OAuth2
